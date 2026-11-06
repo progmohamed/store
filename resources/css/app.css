@@ -1,0 +1,282 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+
+@theme {
+    --font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --color-ios-blue: #087f5b;
+    --color-ios-background: #f2f7f4;
+    --color-ios-green: #34c759;
+    --color-ios-orange: #ff9500;
+    --color-ios-red: #ff3b30;
+}
+
+@layer base {
+    html {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    input,
+    textarea,
+    button {
+        font: inherit;
+    }
+}
+
+@layer components {
+    .ios-page-header {
+        @apply flex flex-col gap-1 px-1 pt-2;
+    }
+
+    .ios-eyebrow {
+        @apply text-sm font-semibold text-ios-blue;
+    }
+
+    .ios-large-title {
+        @apply text-[2rem] font-bold leading-tight tracking-tight text-slate-950;
+    }
+
+    .ios-section-title {
+        @apply px-1 text-sm font-semibold text-slate-500;
+    }
+
+    .ios-card {
+        @apply overflow-hidden rounded-[1.35rem] bg-white shadow-sm ring-1 ring-slate-900/5;
+    }
+
+    .ios-form-group {
+        @apply overflow-hidden rounded-[1.35rem] bg-white shadow-sm ring-1 ring-slate-900/5;
+    }
+
+    .ios-form-row {
+        @apply flex flex-col gap-1.5 border-b border-slate-200/80 px-4 py-3 last:border-b-0;
+    }
+
+    .ios-label {
+        @apply text-[0.8rem] font-semibold text-slate-500;
+    }
+
+    .ios-input {
+        @apply w-full appearance-none border-0 bg-transparent p-0 text-[1.05rem] text-slate-950 outline-none placeholder:text-slate-300 focus:ring-0;
+    }
+
+    .ios-input-error {
+        @apply text-ios-red;
+    }
+
+    .ios-error {
+        @apply text-xs font-medium text-ios-red;
+    }
+
+    .ios-primary-button {
+        @apply min-h-13 w-full rounded-2xl bg-ios-blue px-5 py-3 text-[1.05rem] font-semibold text-white shadow-sm transition active:scale-[0.98] active:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200;
+    }
+
+    .ios-status {
+        @apply rounded-2xl bg-green-50 px-4 py-3 text-sm font-medium text-green-700 ring-1 ring-green-200/80;
+    }
+
+    .ios-tab-bar {
+        padding-bottom: env(safe-area-inset-bottom);
+        @apply fixed inset-x-0 bottom-0 z-50 border-t border-slate-300/70 bg-white/85 shadow-[0_-4px_20px_rgba(15,23,42,0.06)] backdrop-blur-xl;
+    }
+
+    .ios-tab {
+        @apply flex min-h-16 flex-col items-center justify-center gap-0.5 text-[0.68rem] font-semibold transition active:scale-95;
+    }
+
+    .ios-quick-add-dialog {
+        width: min(calc(100% - 1.5rem), 30rem);
+        margin: auto auto max(0.75rem, env(safe-area-inset-bottom));
+        @apply max-h-[calc(100dvh-2rem)] overflow-visible border-0 bg-transparent p-0 text-slate-950 outline-none;
+    }
+
+    .ios-quick-add-dialog::backdrop {
+        background: rgb(15 23 42 / 45%);
+        backdrop-filter: blur(4px);
+    }
+
+    .ios-action-sheet {
+        @apply overflow-hidden rounded-[1.35rem] bg-white/95 shadow-2xl ring-1 ring-black/5 backdrop-blur-xl;
+    }
+
+    .ios-action-row {
+        @apply flex min-h-15 items-center gap-3 border-b border-slate-200/80 px-4 py-3 text-start text-base font-semibold last:border-b-0 active:bg-slate-100;
+    }
+}
+
+@layer components {
+    main, main :where(.grid, .flex) > * {
+        min-width: 0;
+    }
+
+    .ios-card, .ios-form-group, .ios-input {
+        min-width: 0;
+        max-width: 100%;
+    }
+
+    .ios-input {
+        min-height: 2.75rem;
+    }
+
+    .ios-card :where(p, h2, h3, dd), .ios-page-header {
+        overflow-wrap: anywhere;
+    }
+
+    [data-cycle-panel] {
+        scroll-margin-top: 1rem;
+    }
+
+    @media (width < 40rem) {
+        .ios-large-title {
+            font-size: 1.6rem;
+        }
+
+        main form .grid {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
+        main form .grid > * {
+            border-inline-width: 0;
+        }
+
+        .ios-metrics {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 0.75rem;
+        }
+
+        .ios-metrics > * {
+            border-inline-width: 0;
+        }
+
+        .ios-metrics > :last-child:nth-child(odd) {
+            grid-column: 1 / -1;
+        }
+
+        .ios-mobile-records, .ios-mobile-records tbody {
+            display: block;
+            width: 100%;
+        }
+
+        .ios-mobile-records thead {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            overflow: hidden;
+            clip-path: inset(50%);
+        }
+
+        .ios-mobile-records tbody > tr {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            align-items: start;
+            gap: 0.75rem 0;
+            margin: 0 0.5rem 1rem;
+            padding: 1rem 0.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 1.35rem;
+            background: white;
+            box-shadow: 0 2px 3px rgb(15 23 42 / 5%);
+        }
+
+        .ios-mobile-records td {
+            display: block;
+            min-width: 0;
+            width: 100%;
+            padding: 0.5rem;
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+
+        .ios-mobile-records .record-date {
+            grid-column: span 4;
+            order: 0;
+            color: #475569;
+            font-weight: 600;
+            align-self: center;
+        }
+
+        .ios-mobile-records .record-actions,
+        .ios-mobile-records .record-type {
+            grid-column: span 2;
+            order: 1;
+            text-align: end;
+            font-size: 0.8rem;
+        }
+
+        .ios-mobile-records .record-metric {
+            grid-column: span 3;
+            order: 2;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border-inline-start: 1px solid #e2e8f0;
+        }
+
+        .record-history .record-metric {
+            grid-column: span 2;
+        }
+
+        .ios-mobile-records .record-accent {
+            color: #087f5b;
+        }
+
+        .ios-mobile-records .record-danger {
+            color: #ef4444;
+        }
+
+        .ios-mobile-records .record-notes,
+        .ios-mobile-records td[colspan] {
+            grid-column: 1 / -1;
+            order: 3;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 0.75rem;
+            color: #475569;
+            font-size: 0.85rem;
+        }
+
+        .ios-mobile-records .record-actions:has(details[open]) {
+            grid-column: 1 / -1;
+            order: 4;
+            text-align: start;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .ios-mobile-records .record-date::before,
+        .ios-mobile-records .record-actions::before,
+        .ios-mobile-records .record-type::before {
+            display: none;
+        }
+
+        .ios-mobile-records td[data-label]:not(.record-date):not(.record-actions):not(.record-type)::before {
+            content: attr(data-label);
+            display: block;
+            margin-bottom: 0.25rem;
+            color: #64748b;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .ios-mobile-records td:empty {
+            display: none;
+        }
+
+        .ios-mobile-records form {
+            min-width: 0;
+            width: 100%;
+        }
+
+        .ios-mobile-records summary {
+            min-height: 2.75rem;
+            padding-block: 0.75rem;
+        }
+
+        .ios-quick-add-dialog {
+            max-height: calc(100dvh - 2rem);
+            overflow-y: auto;
+        }
+    }
+}
